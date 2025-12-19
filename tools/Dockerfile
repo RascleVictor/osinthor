@@ -41,6 +41,8 @@ RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.12
 RUN python3.12 -m pip install --upgrade pip setuptools wheel
 RUN python3.12 -m pip install uv
 RUN python3.12 -m pip install --upgrade --ignore-installed Flask
+RUN python3.12 -m pip install httpx
+
 # --------------------------------------------------
 # 4. Installation de holehe via pip
 # --------------------------------------------------
@@ -54,6 +56,11 @@ WORKDIR /workspace
 RUN git clone https://github.com/laramies/theHarvester.git && \
     cd theHarvester && \
     uv sync
+
+RUN git clone https://github.com/N0rz3/Zehef.git && \
+    cd Zehef && \
+    python3.12 -m pip install -r requirements.txt
+
 
 COPY serve.py /workspace/serve.py
 
