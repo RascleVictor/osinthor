@@ -40,7 +40,7 @@ RUN add-apt-repository ppa:deadsnakes/ppa && \
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.12
 RUN python3.12 -m pip install --upgrade pip setuptools wheel
 RUN python3.12 -m pip install uv
-
+RUN python3.12 -m pip install --upgrade --ignore-installed Flask
 # --------------------------------------------------
 # 4. Installation de holehe via pip
 # --------------------------------------------------
@@ -55,7 +55,11 @@ RUN git clone https://github.com/laramies/theHarvester.git && \
     cd theHarvester && \
     uv sync
 
+COPY serve.py /workspace/serve.py
+
+EXPOSE 5000
+
 # --------------------------------------------------
 # 6. Commande par défaut
 # --------------------------------------------------
-CMD ["/bin/bash"]
+CMD ["python3.12", "/workspace/serve.py"]
