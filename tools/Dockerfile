@@ -61,6 +61,9 @@ RUN git clone https://github.com/N0rz3/Zehef.git && \
     cd Zehef && \
     python3.12 -m pip install -r requirements.txt
 
+RUN git clone https://github.com/forshaur/aarya.git && \
+    cd aarya && \
+    python3.12 -m pip install .
 
 COPY serve.py /workspace/serve.py
 
